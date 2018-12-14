@@ -11,6 +11,6 @@ branches:
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker build -f Dockerfile -t $TRAVIS_REPO_SLUG:$TAG .
-    docker push $TRAVIS_REPO_SLUG;
+    docker build -f Dockerfile -t lioneleoy/traviscibuildtest:latest .
+    docker push lioneleoy/traviscibuildtest;
     fi
