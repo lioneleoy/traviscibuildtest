@@ -8,9 +8,12 @@ script:
 branches:
   only:
     - master
+before_install:
+  - docker build -t lioneleoy/traviscibuildtest .
+script:
+  - docker images lioneleoy/traviscibuildtest
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker build -f Dockerfile -t lioneleoy/traviscibuildtest .
     docker push lioneleoy/traviscibuildtest;
     fi
