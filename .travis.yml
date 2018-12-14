@@ -1,0 +1,16 @@
+services:
+  - docker
+language: python
+python:
+  - "2.7"
+script:
+  - python -m pytest -v
+branches:
+  only:
+    - master
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker build -f Dockerfile -t $TRAVIS_REPO_SLUG:$TAG .
+    docker push $TRAVIS_REPO_SLUG;
+    fi
